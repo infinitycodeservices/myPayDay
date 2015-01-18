@@ -32,7 +32,7 @@ import com.mypayday.MainActivity;
 import com.mypayday.R;
 import com.mypayday.JSONParser;
 
-//This is a test
+//Edit Test
 
 public class DetailsFragment extends ListFragment implements OnClickListener {
 
