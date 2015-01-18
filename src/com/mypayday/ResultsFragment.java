@@ -5,16 +5,8 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-import com.google.android.gms.maps.CameraUpdate;
-import com.google.android.gms.maps.CameraUpdateFactory;
-import com.google.android.gms.maps.GoogleMap;
-import com.google.android.gms.maps.MapFragment;
-import com.google.android.gms.maps.model.LatLng;
-import com.google.android.gms.maps.model.LatLngBounds;
-import com.google.android.gms.maps.model.Marker;
-import com.google.android.gms.maps.model.MarkerOptions;
-import com.wny.wecare.MainActivity;
-import com.wny.wecare.R;
+import com.mypayday.MainActivity;
+import com.mypayday.R;
 
 import android.app.Activity;
 import android.app.ListFragment;
@@ -27,6 +19,8 @@ import android.widget.ListView;
 import android.widget.SimpleAdapter;
 import android.widget.Toast;
 
+//Ths is a test
+
 public class ResultsFragment extends ListFragment {
 
 	private OnFragmentInteractionListener mListener;
@@ -38,10 +32,6 @@ public class ResultsFragment extends ListFragment {
 	
 	private ListView mListView;
 	
-	private GoogleMap map;
-	
-	//Create map bounds for zoom
-	LatLngBounds.Builder builder = new LatLngBounds.Builder();
 	
 	@Override
 	public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -74,30 +64,6 @@ public class ResultsFragment extends ListFragment {
 		// updating listview
 		setListAdapter(adapter);
 
-		//Setup embedded Google Map fragment
-		map = ((MapFragment) getFragmentManager().findFragmentById(R.id.map))
-				.getMap();
-		map.setMapType(GoogleMap.MAP_TYPE_HYBRID);
-		
-		//Add markers to the map from resultsList
-		for (int i = 0; i < resultsList.size(); i++)	{
-			Double latitude = Double.parseDouble(resultsList.get(i).get("Lat"));
-			Double longitude = Double.parseDouble(resultsList.get(i).get("Lng"));
-			String mname = resultsList.get(i).get("AgencyName");
-			LatLng posit = new LatLng(latitude, longitude);
-			Marker m = map.addMarker(new MarkerOptions()
-			.position(posit)
-			.title(mname));
-			builder.include(m.getPosition());
-		}
-		
-		map.setOnMapLoadedCallback(new GoogleMap.OnMapLoadedCallback() {
-		    @Override
-		    public void onMapLoaded() {
-		    	LatLngBounds bounds = builder.build();
-		        map.animateCamera(CameraUpdateFactory.newLatLngBounds(bounds, 50));
-		    }
-		});
 
 		return rootView;
 		
