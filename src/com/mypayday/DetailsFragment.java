@@ -32,6 +32,8 @@ import com.mypayday.MainActivity;
 import com.mypayday.R;
 import com.mypayday.JSONParser;
 
+//This is a test
+
 public class DetailsFragment extends ListFragment implements OnClickListener {
 
 	// Create array to store details
