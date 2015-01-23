@@ -21,7 +21,7 @@ import android.widget.Toast;
 
 //Ths is a test
 
-public class ResultsFragment extends ListFragment {
+public class Results extends ListFragment {
 
 	private OnFragmentInteractionListener mListener;
 	
@@ -56,41 +56,16 @@ public class ResultsFragment extends ListFragment {
 		//Build listView from results
 		mListView =(ListView)rootView.findViewById(android.R.id.list);
 
-		ListAdapter adapter = new SimpleAdapter(rootView.getContext(), (List<? extends Map<String, ?>>) data,
-				R.layout.custom_row_view, new String[] { "agencyID", "agencyName",
-		"address" }, new int[] { R.id.ragid, R.id.ragname,
-			R.id.ragaddr });
 
 		// updating listview
-		setListAdapter(adapter);
+		setListAdapter(getListAdapter());
 
 
 		return rootView;
 		
 	}
 	
-	// Check if parent activity implements the interface
-		@Override
-		public void onAttach(Activity activity) {
-			super.onAttach(activity);
-			try {
-				mListener =
-						(OnFragmentInteractionListener)  activity;
-			} catch (ClassCastException e) {
-				throw new ClassCastException(activity.toString()
-						+ " must implement OnFragmentInteractionListener");
-			}
-		}
 	
-	@Override
-	public void onListItemClick(ListView l, View v, int position, long id) {    
-
-		int new_position = position;
-		String detailID = data.get(new_position).get("agencyID").toString();
-		MainActivity.setDetailsID(detailID);
-		mListener.onDetailsButton();
-
-	}
 	
 	public void onListFragmentItemClick(int position)	{
 		

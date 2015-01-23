@@ -40,6 +40,7 @@ public class MainActivity extends Activity {
     EditText compID0;
     TextView CmpnyID;
     TextView EmplySSN;
+    TextView CkDate;
     HttpPost httppost;
     StringBuffer buffer;
     HttpResponse response;
