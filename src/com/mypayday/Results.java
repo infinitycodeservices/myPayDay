@@ -23,7 +23,6 @@ import android.widget.Toast;
 
 public class Results extends ListFragment {
 
-	private OnFragmentInteractionListener mListener;
 	
 	ArrayList<Map<String, String>> resultsList = new ArrayList<Map<String, String>>();
 	
@@ -43,12 +42,9 @@ public class Results extends ListFragment {
 		// Load required fields from resultsList
 		for (int i = 0; i < resultsList.size(); i++)	{
 			Map dmap = new HashMap();
-			dmap.put("agencyID", resultsList.get(i).get("AgencyID"));
-			dmap.put("agencyName", resultsList.get(i).get("AgencyName"));
-			dmap.put("address", resultsList.get(i).get("Address1") + " " + 
-					resultsList.get(i).get("City") + " " + resultsList.get(i).get("State") + ", " +
-					resultsList.get(i).get("Zip"));
-			data.add(dmap);
+			dmap.put("ckDate", resultsList.get(i).get("CheckDate"));
+			dmap.put("ckamnt", resultsList.get(i).get("CheckAmount"));
+			
 		}
 
 		View rootView = inflater.inflate(R.layout.fragment_results, container, false);

@@ -4,8 +4,9 @@
     <string name="app_name">my PayDay</string>
     <string name="check_details">Check Details</string>
     <string name="cmpnyid">Company ID</string>
+    <string name="cmpnyNm">Company Name</string>
     <string name="emplyid">Employee ID</string>
-    <string name="CkDate">Check Date</string>
+    <string name="ckdate">Check Date</string>
     <string name="gross">Gross</string>
     <string name="fedwh">Federal WithHeld</string>
     <string name="fica">FICA</string>

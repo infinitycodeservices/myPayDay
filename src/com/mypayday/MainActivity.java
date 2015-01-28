@@ -6,6 +6,7 @@ package com.mypayday;
 
 import java.util.List;
 import java.util.ArrayList;
+import java.util.Map;
 
 import org.apache.http.HttpResponse;
 import org.apache.http.NameValuePair;
@@ -16,6 +17,8 @@ import org.apache.http.client.methods.HttpPost;
 import org.apache.http.impl.client.BasicResponseHandler;
 import org.apache.http.impl.client.DefaultHttpClient;
 import org.apache.http.message.BasicNameValuePair;
+
+import com.mypayday.MainActivity;
 
 import android.app.Activity;
 import android.app.AlertDialog;
@@ -32,6 +35,17 @@ import android.widget.Toast;
 
 
 public class MainActivity extends Activity {
+	
+	// array to store search results for use in multiple fragments
+		protected static ArrayList<Map<String, String>> resultsList = null;
+	
+	public static ArrayList<Map<String, String>> getResultsList()	{
+		return resultsList;
+	}
+	
+	public static void setResultsList(ArrayList<Map<String, String>> arrList)	{
+		MainActivity.resultsList = arrList;
+	}
 
     Button btnSingIn;
     EditText pinBox0;
@@ -82,7 +96,7 @@ public class MainActivity extends Activity {
         try{
 
             httpclient=new DefaultHttpClient();
-            httppost= new HttpPost("http://payproc.net/payroll/login.php"); // make sure the url is correct.
+            httppost= new HttpPost("http://payproc.net/payroll/checkSearch.php"); // make sure the url is correct.
             //add your data
             nameValuePairs = new ArrayList<NameValuePair>(2);
             // Always use the same variable name for posting i.e the android side variable name and php side variable name should be similar,

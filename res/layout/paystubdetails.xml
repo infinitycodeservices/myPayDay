@@ -16,13 +16,6 @@
         android:background="@color/blue"
         android:text="@string/check_details"
         android:textColor="@color/white" />
-    
-      <TextView
-                android:id="@+id/CkDate"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:text="@string/CkDate"
-                android:textAppearance="?android:attr/textAppearanceLarge" />
 
     <LinearLayout
         android:orientation="vertical"
