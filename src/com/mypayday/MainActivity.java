@@ -4,6 +4,8 @@ package com.mypayday;
  * Created by Infinity Code Services on 12/17/2014.
  */
 
+import java.util.HashMap;
+import java.util.Iterator;
 import java.util.List;
 import java.util.ArrayList;
 import java.util.Map;
@@ -17,7 +19,9 @@ import org.apache.http.client.methods.HttpPost;
 import org.apache.http.impl.client.BasicResponseHandler;
 import org.apache.http.impl.client.DefaultHttpClient;
 import org.apache.http.message.BasicNameValuePair;
-
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
 import com.mypayday.MainActivity;
 
 import android.app.Activity;
@@ -36,18 +40,7 @@ import android.widget.Toast;
 
 public class MainActivity extends Activity {
 	
-	// array to store search results for use in multiple fragments
-		protected static ArrayList<Map<String, String>> resultsList = null;
-	
-	public static ArrayList<Map<String, String>> getResultsList()	{
-		return resultsList;
-	}
-	
-	public static void setResultsList(ArrayList<Map<String, String>> arrList)	{
-		MainActivity.resultsList = arrList;
-	}
-
-    Button btnSingIn;
+	Button btnSingIn;
     EditText pinBox0;
     EditText pinBox1;
     EditText pinBox2;
@@ -61,6 +54,52 @@ public class MainActivity extends Activity {
     HttpClient httpclient;
     List<NameValuePair> nameValuePairs;
     ProgressDialog dialog = null;
+    
+    public void agencySearch(String tsearch)	{
+		// Setting the URL for the Search by Check
+		String url_search_checkDetails = "http://www.infinitycodeservices.com/checkSearch.php";
+		// Building parameters for the search
+		List<NameValuePair> params = new ArrayList<NameValuePair>();
+		params.add(new BasicNameValuePair("SSN", tsearch));
+
+		// Getting JSON string from URL
+		JSONArray json = jParser.getJSONFromUrl(url_search_checkDetails, params);
+
+		for (int i = 0; i < json.length(); i++)	{
+			HashMap<String, String> map = new HashMap<String, String>();
+
+			try	{
+				JSONObject c = (JSONObject) json.get(i);
+				//Fill map
+				Iterator iter = c.keys();
+				while(iter.hasNext())	{
+					String currentKey = (String) iter.next();
+					map.put(currentKey, c.getString(currentKey));
+				}
+				resultsList.add(map);
+
+			}
+			catch (JSONException e) {
+				e.printStackTrace();
+
+			}
+
+		};
+
+		MainActivity.setResultsList(resultsList);
+
+	}
+	
+	// array to store search results for use in multiple fragments
+		protected static ArrayList<Map<String, String>> resultsList = null;
+	
+	public static ArrayList<Map<String, String>> getResultsList()	{
+		return resultsList;
+	}
+	
+	public static void setResultsList(ArrayList<Map<String, String>> arrList)	{
+		MainActivity.resultsList = arrList;
+	}
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -81,7 +120,7 @@ public class MainActivity extends Activity {
         btnSingIn.setOnClickListener(new OnClickListener() {
             @Override
             public void onClick(View v) {
-                dialog = ProgressDialog.show(MainActivity.this, "PayStub.java",
+                dialog = ProgressDialog.show(MainActivity.this, "Details.java",
                         "Validating user...", true);
                 new Thread(new Runnable() {
                     public void run() {
@@ -126,7 +165,7 @@ public class MainActivity extends Activity {
                     }
                 });
 
-                startActivity(new Intent(MainActivity.this, PayStub.class));
+                startActivity(new Intent(MainActivity.this, Details.class));
             }else{
                 showAlert();
             }

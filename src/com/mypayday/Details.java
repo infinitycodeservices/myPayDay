@@ -79,7 +79,7 @@ public class Details extends ListFragment implements OnClickListener {
 		// Set TextView variables to populate screen from detailsArray
 		TextView cmpnyid = (TextView) rootView.findViewById(R.id.CmpnyID);
 		TextView emplyid = (TextView) rootView.findViewById(R.id.EmplySSN);
-	//	TextView ckdate = (TextView) rootView.findViewById(R.id.ckdate);
+		TextView ckdate = (TextView) rootView.findViewById(R.id.ckdate);
 		TextView gross = (TextView) rootView.findViewById(R.id.gross);
 		TextView fedwh = (TextView) rootView.findViewById(R.id.fedwh);
 		TextView fica = (TextView) rootView.findViewById(R.id.fica);
